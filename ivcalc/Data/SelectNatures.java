@@ -1,10 +1,6 @@
 package ivcalc.Data;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SelectNatures {
 
@@ -13,7 +9,6 @@ public class SelectNatures {
         try {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:C:./ivcalc/Data/natures.db");
-            System.out.println("Opened database successfully");
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -33,15 +28,37 @@ public class SelectNatures {
             while (rs.next()) {
                 System.out.println(rs.getString("nature"));
             }
-
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    public double select(String nature, String column) {
+        try {
+            ResultSet rs = result(nature);
+            return rs.getDouble(column);
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return 0.0;
+    }
+
+    private ResultSet result(String nature) {
+        String sqlStatement = "SELECT * FROM natures WHERE nature = ?";
+
+        try {
+            Connection conn = this.connect();
+            PreparedStatement preparedStatement = conn.prepareStatement(sqlStatement);
+            preparedStatement.setString(1, nature);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         SelectNatures dn = new SelectNatures();
-        dn.select();
+        System.out.println(dn.select("Bold", "hp"));
     }
 }
