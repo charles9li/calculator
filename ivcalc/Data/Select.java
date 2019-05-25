@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 public interface Select {
 
-    double select(String col1, String col2);
-
     default Connection connect(String database) {
         Connection conn = null;
         try {

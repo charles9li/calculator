@@ -1,27 +1,26 @@
 package ivcalc.Data;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SelectNatures implements Select {
+public class SelectPokemon implements Select {
 
-    private static final String DATABASE = "natures.db";
+    private static final String DATABASE = "pokemon.db";
 
-    public double select(String nature, String column) {
-        String sqlStatement = "SELECT * FROM natures WHERE nature = ?";
+    public int select(String pokemon, String column) {
+        String sqlStatement = "SELECT * FROM pokemon WHERE name = ?";
 
         try {
             Connection conn = connect(DATABASE);
             PreparedStatement preparedStatement = conn.prepareStatement(sqlStatement);
-            preparedStatement.setString(1, nature);
+            preparedStatement.setString(1, pokemon);
             ResultSet rs = preparedStatement.executeQuery();
-            return rs.getDouble(column);
+            return rs.getInt(column);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        return 0.0;
+        return 0;
     }
 }
