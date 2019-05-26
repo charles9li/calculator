@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd70ba10-6199-4b7d-ae52-f04c584ce532" name="Default Changelist" comment="successfully queried natures database">
+    <list default="true" id="bd70ba10-6199-4b7d-ae52-f04c584ce532" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ivcalc/Data/SelectNatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/ivcalc/Data/SelectNatures.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ivcalc/Data/SelectPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/ivcalc/Data/SelectPokemon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ivcalc/Test/TestSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/ivcalc/Test/TestSelect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calculator/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Calculator/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calculator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Calculator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calculator/HelloWorld.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,47 +14,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ivcalc/Data/SelectNatures.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ivcalc/Data/SelectPokemon.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="21" column="58" selection-start-line="21" selection-start-column="58" selection-end-line="21" selection-end-column="58" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ivcalc/Calculator/Pokemon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#391#392#0" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ivcalc/Test/TestPokemon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ivcalc/Test/TestSelect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ivcalc/Util/Stat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="32" lean-forward="true" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            <state relative-caret-position="102">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -88,6 +73,8 @@
         <option value="$PROJECT_DIR$/ivcalc/Data/SelectNatures.java" />
         <option value="$PROJECT_DIR$/ivcalc/Data/SelectPokemon.java" />
         <option value="$PROJECT_DIR$/ivcalc/Test/TestSelect.java" />
+        <option value="$PROJECT_DIR$/ivcalc/Test/TestPokemon.java" />
+        <option value="$PROJECT_DIR$/ivcalc/Calculator/Pokemon.java" />
       </list>
     </option>
   </component>
@@ -118,6 +105,12 @@
               <item name="calculator" type="b2602c69:ProjectViewProjectNode" />
               <item name="calculator" type="462c0819:PsiDirectoryNode" />
               <item name="ivcalc" type="462c0819:PsiDirectoryNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="ivcalc" type="462c0819:PsiDirectoryNode" />
               <item name="Data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -135,7 +128,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558841177008" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558842323632" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/sqlite-jdbc-3.27.2.1.jar!/" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -161,7 +154,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestSelectNatures">
+  <component name="RunManager" selected="JUnit.TestPokemon">
     <configuration name="SelectNatures" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ivcalc.Data.SelectNatures" />
       <module name="calculator" />
@@ -188,6 +181,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestPokemon" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ivcalc.Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ivcalc.Test" />
+      <option name="MAIN_CLASS_NAME" value="ivcalc.Test.TestPokemon" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestSelect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="calculator" />
       <extension name="coverage">
@@ -205,6 +213,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestPokemon" />
         <item itemvalue="JUnit.TestSelectNatures" />
         <item itemvalue="Application.Stat" />
         <item itemvalue="Application.SelectNatures" />
@@ -222,6 +231,14 @@
       <option name="presentableId" value="Default" />
       <updated>1558760540530</updated>
     </task>
+    <task id="LOCAL-00001" summary="changed select so that it takes in stat enum instead of string">
+      <created>1558841204339</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1558841204339</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -247,6 +264,9 @@
       <configuration name="TestSelect" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestSelect - 2019.05.25 at 20h 22m 06s.xml">
+      <configuration name="TestSelect" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestSelect - 2019.05.25 at 20h 26m 19s.xml">
       <configuration name="TestSelect" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -285,7 +305,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="successfully queried natures database" />
-    <option name="LAST_COMMIT_MESSAGE" value="successfully queried natures database" />
+    <MESSAGE value="changed select so that it takes in stat enum instead of string" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed select so that it takes in stat enum instead of string" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/HelloWorld.java">
@@ -320,13 +341,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ivcalc/Calculator/Pokemon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ivcalc/Util/Stat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -356,10 +370,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ivcalc/Test/TestSelect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivcalc/Test/TestPokemon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivcalc/Calculator/Pokemon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
           </folding>
         </state>
       </provider>
