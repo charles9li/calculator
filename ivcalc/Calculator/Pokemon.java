@@ -2,7 +2,7 @@ package ivcalc.Calculator;
 
 import ivcalc.Data.SelectNatures;
 import ivcalc.Data.SelectPokemon;
-import ivcalc.Util.Stat;
+import ivcalc.Util.StatType;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,7 +14,7 @@ public class Pokemon {
 
     private String name;
     private String nature;
-    private Map<Stat, Integer> baseStats;
+    private Map<StatType, Integer> baseStats;
 
     public Pokemon(String name, String nature) {
         this.name = name;
@@ -22,23 +22,25 @@ public class Pokemon {
         findBaseStats();
     }
 
-    public Map<Stat, Integer> baseStats() {
+    public Map<StatType, Integer> baseStats() {
         return baseStats;
     }
 
     private void findBaseStats() {
         baseStats = new TreeMap<>();
-        for (Stat stat : Stat.values()) {
+        for (StatType stat : StatType.values()) {
             baseStats.put(stat, sp.select(name, stat));
         }
     }
 
-    private int calcStat(Stat stat, int lvl, int iv, int ev) {
-        int temp = (int) ((2 * baseStats.get(stat) + iv + ev / 4) * (double) lvl / 100);
-        if (stat == Stat.HP) {
+    private int calcStat(StatType statType, int lvl, int iv, int ev) {
+        int temp = (int) ((2 * baseStats.get(statType) + iv + ev / 4) * (double) lvl / 100);
+        if (statType == StatType.HP) {
             return temp + lvl + 10;
         } else {
-            return (int) ((temp + 5) * sn.select(nature, stat));
+            return (int) ((temp + 5) * sn.select(nature, statType));
         }
     }
+
+//    private class
 }

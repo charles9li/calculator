@@ -1,5 +1,5 @@
 package ivcalc.Util;
 
-public enum Stat {
+public enum StatType {
     HP, ATK, DEF, SPA, SPD, SPE;
 }

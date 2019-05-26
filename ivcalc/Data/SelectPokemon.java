@@ -1,6 +1,6 @@
 package ivcalc.Data;
 
-import ivcalc.Util.Stat;
+import ivcalc.Util.StatType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ public class SelectPokemon implements Select {
 
     private static final String DATABASE = "pokemon.db";
 
-    public int select(String pokemon, Stat stat) {
+    public int select(String pokemon, StatType statType) {
         String sqlStatement = "SELECT * FROM pokemon WHERE name = ?";
 
         try {
@@ -19,7 +19,7 @@ public class SelectPokemon implements Select {
             PreparedStatement preparedStatement = conn.prepareStatement(sqlStatement);
             preparedStatement.setString(1, pokemon);
             ResultSet rs = preparedStatement.executeQuery();
-            return rs.getInt(stat.toString().toLowerCase());
+            return rs.getInt(statType.toString().toLowerCase());
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
