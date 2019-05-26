@@ -2,6 +2,7 @@ package ivcalc.Calculator;
 
 import ivcalc.Data.SelectNatures;
 import ivcalc.Data.SelectPokemon;
+import ivcalc.Util.StatMap;
 import ivcalc.Util.StatType;
 
 import java.util.Map;
@@ -29,7 +30,7 @@ public class Pokemon {
     private void findBaseStats() {
         baseStats = new TreeMap<>();
         for (StatType stat : StatType.values()) {
-            baseStats.put(stat, sp.select(name, stat));
+            baseStats.put(stat, sp.selectBaseStat(name, stat));
         }
     }
 
@@ -42,5 +43,27 @@ public class Pokemon {
         }
     }
 
-//    private class
+    private class LevelInfo {
+        private int level;
+        private Map<StatType, Integer> stats;
+        private Map<StatType, Integer> effortValues;
+
+        private LevelInfo(int lvl,
+                          int hpStat, int atkStat, int defStat,
+                          int spaStat, int spdStat, int speStat) {
+            this(lvl,
+                hpStat, atkStat, defStat, spaStat, spdStat, speStat,
+                0, 0, 0, 0, 0, 0);
+        }
+
+        private LevelInfo(int lvl,
+                          int hpStat, int atkStat, int defStat,
+                          int spaStat, int spdStat, int speStat,
+                          int hpEV, int atkEV, int defEV,
+                          int spaEV, int spdEV, int speEV) {
+            level = lvl;
+            stats = StatMap.createStatMap(hpStat, atkStat, defStat, spaStat, spdStat, speStat);
+            effortValues = StatMap.createStatMap(hpEV, atkEV, defEV, spaEV, spdEV, speEV);
+        }
+    }
 }

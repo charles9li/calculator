@@ -17,9 +17,16 @@ public class TestSelect {
     }
 
     @Test
+    public void TestSelectDexNum() {
+        SelectPokemon sp = new SelectPokemon();
+        assertEquals(1, sp.selectDexNum("Bulbasaur"));
+        assertEquals(251, sp.selectDexNum("Celebi"));
+    }
+
+    @Test
     public void TestSelectPokemon() {
         SelectPokemon sp = new SelectPokemon();
-        assertEquals(45, sp.select("Bulbasaur", StatType.HP));
-        assertEquals(108, sp.select("Terrakion", StatType.SPE));
+        assertEquals(45, sp.selectBaseStat("Bulbasaur", StatType.HP));
+        assertEquals(108, sp.selectBaseStat("Terrakion", StatType.SPE));
     }
 }

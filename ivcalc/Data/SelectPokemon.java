@@ -11,7 +11,21 @@ public class SelectPokemon implements Select {
 
     private static final String DATABASE = "pokemon.db";
 
-    public int select(String pokemon, StatType statType) {
+    public int selectDexNum(String pokemon) {
+        String sqlStatement = "SELECT * FROM pokemon WHERE name = ?";
+        try {
+            Connection conn = connect(DATABASE);
+            PreparedStatement preparedStatement = conn.prepareStatement(sqlStatement);
+            preparedStatement.setString(1, pokemon);
+            ResultSet rs = preparedStatement.executeQuery();
+            return rs.getInt("number");
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return 0;
+    }
+
+    public int selectBaseStat(String pokemon, StatType statType) {
         String sqlStatement = "SELECT * FROM pokemon WHERE name = ?";
 
         try {

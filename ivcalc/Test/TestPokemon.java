@@ -13,7 +13,7 @@ public class TestPokemon {
 
     @Test
     public void testBaseStats() {
-        Pokemon pokemon = new Pokemon("Bulbasaur");
+        Pokemon pokemon = new Pokemon("Bulbasaur", "Bold");
         Map<StatType, Integer> expected = new TreeMap<>();
         expected.put(StatType.HP, 45);
         expected.put(StatType.ATK, 49);
