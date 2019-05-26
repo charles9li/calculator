@@ -4,6 +4,7 @@ import ivcalc.Data.SelectNatures;
 import ivcalc.Data.SelectPokemon;
 import ivcalc.Util.Stat;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestSelect {
