@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
 
 public class SelectPokemon implements Select {
 
@@ -34,6 +36,40 @@ public class SelectPokemon implements Select {
             preparedStatement.setString(1, pokemon);
             ResultSet rs = preparedStatement.executeQuery();
             return rs.getInt(statType.toString().toLowerCase());
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return 0;
+    }
+
+    public String[] selectPokemonNames() {
+        String sqlStatement = "SELECT * FROM pokemon ORDER BY number ASC";
+
+        String[] pokemonNames = new String[selectNumRows()];
+
+        try {
+            Connection conn = connect(DATABASE);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlStatement);
+            int i = 0;
+            while (rs.next()) {
+                pokemonNames[i] = rs.getString("name");
+                i++;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return pokemonNames;
+    }
+
+    private int selectNumRows() {
+        String sqlStatement = "SELECT COUNT(*) AS numrows FROM pokemon";
+
+        try {
+            Connection conn = connect(DATABASE);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlStatement);
+            return rs.getInt("numrows");
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }

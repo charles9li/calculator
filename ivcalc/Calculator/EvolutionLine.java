@@ -178,6 +178,20 @@ public class EvolutionLine {
     }
 
     /**
+     * Calculates a specified stat for an evolution given a LevelInfo instance.
+     *
+     * @param statType type of stat
+     * @param lvlInfo input line
+     * @return stat
+     */
+    private int calcStat(StatType statType, LevelInfo lvlInfo, int iv) {
+        int evoIndex = lvlInfo.getEvoIndex();
+        int level = lvlInfo.getLevel();
+        int ev = lvlInfo.getEV(statType);
+        return calcStat(evoIndex, statType, level, iv, ev);
+    }
+
+    /**
      * Ensures that IVs are between 0 and 31, inclusive.
      *
      * @param iv individual value
@@ -206,8 +220,8 @@ public class EvolutionLine {
         int level = levelInfo.getLevel();
         int ev = levelInfo.getEV(statType);
         int stat = levelInfo.getStat(statType);
-        int lowerBound = calcStat(evoIndex, statType, level, 0, ev);
-        int upperBound = calcStat(evoIndex, statType, level, 31, ev);
+        int lowerBound = calcStat(statType, levelInfo, 0);
+        int upperBound = calcStat(statType, levelInfo, 31);
         if (stat < lowerBound || stat > upperBound) {
             String message = "A level " + level + " "
                 + getEvolutionName(evoIndex) + " with a " + nature
