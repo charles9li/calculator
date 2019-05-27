@@ -22,9 +22,9 @@ public class IVList {
             throw new IllegalArgumentException("Deque must contain at least one List instance.");
         }
         Set<Integer> IVSet = new HashSet<>(listDeque.pop());
-        Set<Integer> temp = new HashSet<>();
+        Set<Integer> temp;
         while (listDeque.size() > 0) {
-            temp.clear();
+            temp = new HashSet<>();
             List<Integer> IVList = listDeque.pop();
             for (int iv : IVList) {
                 if (IVSet.contains(iv)) {

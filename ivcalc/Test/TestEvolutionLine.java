@@ -53,5 +53,33 @@ public class TestEvolutionLine {
 
         List<Integer> atkExpected = IVList.createIVList(20, 20);
         assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
+
+        List<Integer> spaExpected = IVList.createIVList(24, 24);
+        assertEquals(spaExpected, evolutionLine.getIVRange(StatType.SPA));
+    }
+
+    @Test
+    public void testStaryu() {
+        EvolutionLine evolutionLine = new EvolutionLine("Staryu", "Gentle");
+        LevelInfo lvl22 = new LevelInfo(22, 0, 52, 30, 31, 42, 39, 46);
+        evolutionLine.addLevelInfo(lvl22);
+        evolutionLine.calcIVRanges();
+
+        List<Integer> atkExpected = IVList.createIVList(24, 28);
+        assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
+
+        LevelInfo lvl23 = new LevelInfo(23, 0, 53, 31, 32, 44, 40, 48);
+        evolutionLine.addLevelInfo(lvl23);
+        evolutionLine.calcIVRanges();
+
+        atkExpected = IVList.createIVList(24, 27);
+        assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
+
+        LevelInfo lvl24 = new LevelInfo(24, 0, 55, 33, 33, 46, 41, 50);
+        evolutionLine.addLevelInfo(lvl24);
+        evolutionLine.calcIVRanges();
+
+        atkExpected = IVList.createIVList(27, 27);
+        assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
     }
 }
