@@ -102,7 +102,7 @@ public class EvolutionLine {
     }
 
     private List<Integer> calcIVRangeLevel(StatType statType, LevelInfo lvlInfo) {
-        if (evolutionName(lvlInfo.getEvoIndex()).equals("Shedinja")) {
+        if (statType == StatType.HP && evolutionName(lvlInfo.getEvoIndex()).equals("Shedinja")) {
             return IVList.createIVList(0, 31);
         }
 

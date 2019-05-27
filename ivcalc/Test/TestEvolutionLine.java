@@ -40,4 +40,18 @@ public class TestEvolutionLine {
         List<Integer> speExpected = IVList.createIVList(0, 1);
         assertEquals(speExpected, evolutionLine.getIVRange(StatType.SPE));
     }
+
+    @Test
+    public void testShedinja() {
+        EvolutionLine evolutionLine = new EvolutionLine("Shedinja", "Adamant");
+        LevelInfo lvl100 = new LevelInfo(100, 0, 1, 225, 113, 80, 75, 100);
+        evolutionLine.addLevelInfo(lvl100);
+        evolutionLine.calcIVRanges();
+
+        List<Integer> hpExpected = IVList.createIVList(0, 31);
+        assertEquals(hpExpected, evolutionLine.getIVRange(StatType.HP));
+
+        List<Integer> atkExpected = IVList.createIVList(20, 20);
+        assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
+    }
 }
