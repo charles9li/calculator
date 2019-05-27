@@ -26,7 +26,7 @@ public class EvolutionLine {
     private static final SelectNatures SELECT_NATURES = new SelectNatures();
 
     /**
-     * Contains base stat information for the Pokemon in this evolution line.
+     * Contains base stat information for the Pokemon in this getEvolution line.
      */
     private Pokemon pokemon;
 
@@ -88,11 +88,17 @@ public class EvolutionLine {
      */
     public void calcIVRanges() {
         for (StatType statType : StatType.values()) {
-            rangeIVMap.put(statType, calcIVRangeSingleStat(statType));
+            rangeIVMap.put(statType, calcIVRangeStat(statType));
         }
     }
 
-    private List<Integer> calcIVRangeSingleStat(StatType statType) {
+    /**
+     * Calculates the IV range for a single stat using input from each level.
+     *
+     * @param statType type of stat
+     * @return List instance containing possible IVs for specified stat
+     */
+    private List<Integer> calcIVRangeStat(StatType statType) {
         Deque<List<Integer>> IVRangeDeque = new ArrayDeque<>();
         for (LevelInfo levelInfo : levelInfoList) {
             List<Integer> IVRange = calcIVRangeLevel(statType, levelInfo);
@@ -101,13 +107,24 @@ public class EvolutionLine {
         return IVList.createIVList(IVRangeDeque);
     }
 
+    /**
+     * Calculates the IV range for a single levelInfo input and stat. Includes
+     * an exception for Shedinja's HP stat where a range of 0 to 31 inclusive
+     * is returned by default.
+     *
+     * @param statType type of stat
+     * @param lvlInfo input line
+     * @return List containing possible IVs
+     */
     private List<Integer> calcIVRangeLevel(StatType statType, LevelInfo lvlInfo) {
-        if (statType == StatType.HP && evolutionName(lvlInfo.getEvoIndex()).equals("Shedinja")) {
+        int evoIndex = lvlInfo.getEvoIndex();
+
+        // Shedinja HP exception
+        if (statType == StatType.HP && getEvolutionName(evoIndex).equals("Shedinja")) {
             return IVList.createIVList(0, 31);
         }
 
         int level = lvlInfo.getLevel();
-        int evoIndex = lvlInfo.getEvoIndex();
         int baseStat = getBaseStat(evoIndex, statType);
         int stat = lvlInfo.getStat(statType);
         int ev = lvlInfo.getEV(statType);
@@ -135,6 +152,18 @@ public class EvolutionLine {
         return IVList.createIVList(makeIVProper(lowerBound), makeIVProper(upperBound));
     }
 
+    // Calculation methods.
+
+    /**
+     * Calculates a specified stat for an evolution given level, IV, and EV.
+     *
+     * @param evoIndex evolution index
+     * @param statType type of stat
+     * @param lvl level
+     * @param iv individual value
+     * @param ev effort value
+     * @return stat
+     */
     private int calcStat(int evoIndex, StatType statType, int lvl, int iv, int ev) {
         int baseStat = getBaseStat(evoIndex, statType);
         int temp = (int) ((2 * baseStat + iv + ev / 4) * (double) lvl / 100);
@@ -145,27 +174,12 @@ public class EvolutionLine {
         }
     }
 
-    private double getNatureMultiplier(StatType statType) {
-        return SELECT_NATURES.select(nature, statType);
-    }
-
-    private int getBaseStat(int evoIndex, StatType statType) {
-        return evolution(evoIndex).getBaseStats().get(statType);
-    }
-
-    private Pokemon evolution(int evoIndex) {
-        Pokemon current = pokemon;
-        while (evoIndex > 0) {
-            current = current.getEvolution();
-            evoIndex--;
-        }
-        return current;
-    }
-
-    private String evolutionName(int evoIndex) {
-        return evolution(evoIndex).getName();
-    }
-
+    /**
+     * Ensures that IVs are between 0 and 31, inclusive.
+     *
+     * @param iv individual value
+     * @return proper individual value
+     */
     private int makeIVProper(int iv) {
         if (iv > 31) {
             return 31;
@@ -174,5 +188,54 @@ public class EvolutionLine {
             return 0;
         }
         return iv;
+    }
+
+    // Methods for retrieving information from SQL databases.
+
+    /**
+     * Returns the stat multiplier dictated by the nature.
+     *
+     * @param statType type of stat
+     * @return stat multiplier
+     */
+    private double getNatureMultiplier(StatType statType) {
+        return SELECT_NATURES.select(nature, statType);
+    }
+
+    /**
+     * Returns the specified base stat for an evolution specified by the
+     * evolution index.
+     *
+     * @param evoIndex evolution index
+     * @param statType type of stat
+     * @return base stat
+     */
+    private int getBaseStat(int evoIndex, StatType statType) {
+        return getEvolution(evoIndex).getBaseStats().get(statType);
+    }
+
+    /**
+     * Returns the name of the evolution specified by the evolution index.
+     *
+     * @param evoIndex evolution index
+     * @return evolution name
+     */
+    private String getEvolutionName(int evoIndex) {
+        return getEvolution(evoIndex).getName();
+    }
+
+    /**
+     * Returns the Pokemon instance for the specified evolution index.
+     *
+     * @param evoIndex evolution index
+     * @return Pokemon instance
+     */
+    private Pokemon getEvolution(int evoIndex) {
+        Pokemon current = pokemon;
+        while (evoIndex > 0) {
+            current = current.getEvolution();
+            evoIndex--;
+        }
+        return current;
     }
 }
