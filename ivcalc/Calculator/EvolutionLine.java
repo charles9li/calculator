@@ -102,6 +102,10 @@ public class EvolutionLine {
     }
 
     private List<Integer> calcIVRangeLevel(StatType statType, LevelInfo lvlInfo) {
+        if (evolutionName(lvlInfo.getEvoIndex()).equals("Shedinja")) {
+            return IVList.createIVList(0, 31);
+        }
+
         int level = lvlInfo.getLevel();
         int evoIndex = lvlInfo.getEvoIndex();
         int baseStat = getBaseStat(evoIndex, statType);
@@ -156,6 +160,10 @@ public class EvolutionLine {
             evoIndex--;
         }
         return current;
+    }
+
+    private String evolutionName(int evoIndex) {
+        return evolution(evoIndex).getName();
     }
 
     private int makeIVProper(int iv) {

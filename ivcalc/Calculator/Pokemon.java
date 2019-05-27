@@ -19,6 +19,10 @@ public class Pokemon {
         findBaseStats();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Map<StatType, Integer> getBaseStats() {
         return baseStats;
     }
