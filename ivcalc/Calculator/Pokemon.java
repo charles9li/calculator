@@ -1,8 +1,6 @@
 package ivcalc.Calculator;
 
-import ivcalc.Data.SelectNatures;
 import ivcalc.Data.SelectPokemon;
-import ivcalc.Util.StatMap;
 import ivcalc.Util.StatType;
 
 import java.util.Map;
@@ -10,7 +8,7 @@ import java.util.TreeMap;
 
 public class Pokemon {
 
-    private SelectPokemon sp = new SelectPokemon();
+    private static final SelectPokemon SELECT_POKEMON = new SelectPokemon();
 
     private String name;
     private Map<StatType, Integer> baseStats;
@@ -32,7 +30,7 @@ public class Pokemon {
     private void findBaseStats() {
         baseStats = new TreeMap<>();
         for (StatType stat : StatType.values()) {
-            baseStats.put(stat, sp.selectBaseStat(name, stat));
+            baseStats.put(stat, SELECT_POKEMON.selectBaseStat(name, stat));
         }
     }
 }
