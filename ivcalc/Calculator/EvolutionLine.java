@@ -124,6 +124,9 @@ public class EvolutionLine {
             return IVList.createIVList(0, 31);
         }
 
+        // check if stat input is valid
+        checkStat(statType, lvlInfo);
+
         int level = lvlInfo.getLevel();
         int baseStat = getBaseStat(evoIndex, statType);
         int stat = lvlInfo.getStat(statType);
@@ -188,6 +191,31 @@ public class EvolutionLine {
             return 0;
         }
         return iv;
+    }
+
+    // Methods for checking input values.
+
+    /**
+     * Throws IllegalArgumentException if stat is not valid.
+     *
+     * @param statType type of stat
+     * @param levelInfo input line
+     */
+    private void checkStat(StatType statType, LevelInfo levelInfo) {
+        int evoIndex = levelInfo.getEvoIndex();
+        int level = levelInfo.getLevel();
+        int ev = levelInfo.getEV(statType);
+        int stat = levelInfo.getStat(statType);
+        int lowerBound = calcStat(evoIndex, statType, level, 0, ev);
+        int upperBound = calcStat(evoIndex, statType, level, 31, ev);
+        if (stat < lowerBound || stat > upperBound) {
+            String message = "A level " + level + " "
+                + getEvolutionName(evoIndex) + " with a " + nature
+                + " nature and " + ev + " " + statType.toString()
+                + " EVs should have a " + statType.toString()
+                + " stat between " + lowerBound + " and " + upperBound;
+            throw new IllegalArgumentException(message);
+        }
     }
 
     // Methods for retrieving information from SQL databases.
