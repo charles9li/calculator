@@ -11,28 +11,81 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Contains information for a Pokemon and its evolutions, if they exist. The
+ * constructor takes in the species name and nature of the Pokemon. LevelInfo
+ * instances are then added to the instance of this class. The calcIVRanges
+ * method is called to calculate the IV range for each stat.
+ */
 public class EvolutionLine {
 
+    /**
+     * Used for interfacing with SQL to find stat multipliers for a given
+     * nature.
+     */
     private static final SelectNatures SELECT_NATURES = new SelectNatures();
 
+    /**
+     * Contains base stat information for the Pokemon in this evolution line.
+     */
     private Pokemon pokemon;
+
+    /**
+     * Nature of this Pokemon.
+     */
     private String nature;
+
+    /**
+     * List of inputs from each line. Inputs are added via the addLevelInfo
+     * method.
+     */
     private List<LevelInfo> levelInfoList = new ArrayList<>();
+
+    /**
+     * Maps the stat type to its corresponding IV range. The ranges are
+     * computed using the calcIVRanges method.
+     */
     private Map<StatType, List<Integer>> rangeIVMap = new TreeMap<>();
 
+    /**
+     * Constructor for the EvolutionLine class. Takes in a species name and
+     * nature and gathers information about the Pokemon and its evolutions.
+     *
+     * @param name Pokemon species name
+     * @param nature Pokemon nature
+     */
     public EvolutionLine(String name, String nature) {
         this.pokemon = new Pokemon(name);
         this.nature = nature;
     }
 
+    // Add and retrieval methods.
+
+    /**
+     * Adds an input line to the levelInfoList variable.
+     *
+     * @param levelInfo input line
+     */
     public void addLevelInfo(LevelInfo levelInfo) {
         levelInfoList.add(levelInfo);
     }
 
+    /**
+     * Returns the IV range for a specified stat.
+     *
+     * @param statType type of stat
+     * @return List of IVs
+     */
     public List<Integer> getIVRange(StatType statType) {
         return rangeIVMap.get(statType);
     }
 
+    // Methods used to compute the IV ranges from line inputs.
+    // Methods from the ivcalc.Util package are used.
+
+    /**
+     * Computes the IV range for each stat.
+     */
     public void calcIVRanges() {
         for (StatType statType : StatType.values()) {
             rangeIVMap.put(statType, calcIVRangeSingleStat(statType));
@@ -42,18 +95,18 @@ public class EvolutionLine {
     private List<Integer> calcIVRangeSingleStat(StatType statType) {
         Deque<List<Integer>> IVRangeDeque = new ArrayDeque<>();
         for (LevelInfo levelInfo : levelInfoList) {
-            List<Integer> IVRange = calcIVRangeSingleLevel(statType, levelInfo);
+            List<Integer> IVRange = calcIVRangeLevel(statType, levelInfo);
             IVRangeDeque.addLast(IVRange);
         }
         return IVList.createIVList(IVRangeDeque);
     }
 
-    private List<Integer> calcIVRangeSingleLevel(StatType statType, LevelInfo levelInfo) {
-        int level = levelInfo.getLevel();
-        int evoIndex = levelInfo.getEvoIndex();
+    private List<Integer> calcIVRangeLevel(StatType statType, LevelInfo lvlInfo) {
+        int level = lvlInfo.getLevel();
+        int evoIndex = lvlInfo.getEvoIndex();
         int baseStat = getBaseStat(evoIndex, statType);
-        int stat = levelInfo.getStat(statType);
-        int ev = levelInfo.getEV(statType);
+        int stat = lvlInfo.getStat(statType);
+        int ev = lvlInfo.getEV(statType);
         List<Integer> returnList = new ArrayList<>();
         int lowerBound = 0;
         int upperBound = 31;
