@@ -13,7 +13,7 @@ public class TestPokemon {
 
     @Test
     public void testBaseStats() {
-        Pokemon pokemon = new Pokemon("Bulbasaur", "Bold");
+        Pokemon pokemon = new Pokemon("Bulbasaur");
         Map<StatType, Integer> expected = new TreeMap<>();
         expected.put(StatType.HP, 45);
         expected.put(StatType.ATK, 49);
@@ -21,6 +21,6 @@ public class TestPokemon {
         expected.put(StatType.SPA, 65);
         expected.put(StatType.SPD, 65);
         expected.put(StatType.SPE, 45);
-        assertEquals(expected, pokemon.baseStats());
+        assertEquals(expected, pokemon.getBaseStats());
     }
 }
