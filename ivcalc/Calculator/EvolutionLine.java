@@ -29,6 +29,10 @@ public class EvolutionLine {
         levelInfoList.add(levelInfo);
     }
 
+    public List<Integer> getIVRange(StatType statType) {
+        return rangeIVMap.get(statType);
+    }
+
     public void calcIVRanges() {
         for (StatType statType : StatType.values()) {
             rangeIVMap.put(statType, calcIVRangeSingleStat(statType));
