@@ -1,36 +1,36 @@
 package ivcalc.GUI;
 
 import ivcalc.Data.SelectPokemon;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
-import javax.swing.*;
-
-public class IVCalcGUI extends JFrame {
+public class IVCalcGUI extends Application {
 
     private static final SelectPokemon sp = new SelectPokemon();
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Pokemon S/M IV Calculator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
-        frame.setLocation(430, 100);
+        launch(args);
+    }
 
-        JPanel panel = new JPanel();
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("IV Calculator");
+        ComboBox<String> comboBox = createPokemonList();
 
-        frame.add(panel);
+        HBox hbox = new HBox(comboBox);
 
-        JLabel label = new JLabel("Pokemon");
-        label.setVisible(true);
+        Scene scene = new Scene(hbox, 200, 120);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
-        panel.add(label);
-
-
-//        JComboBox<String> pokemonSearch = new JComboBox<>(sp.selectPokemonNames());
-        JComboBox<String> pokemonSearch = new JComboBox<>(new String[] {"", "Bulbasaur"});
-        pokemonSearch.setEditable(true);
-        panel.add(pokemonSearch);
-
-
-        panel.add(pokemonSearch);
-        frame.setVisible(true);
+    private ComboBox<String> createPokemonList() {
+        ComboBox<String> comboBox = new ComboBox<>();
+        for (String name : sp.selectPokemonNamesList()) {
+            comboBox.getItems().add(name);
+        }
+        return comboBox;
     }
 }
