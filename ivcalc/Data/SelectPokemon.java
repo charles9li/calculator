@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SelectPokemon implements Select {
 
@@ -40,6 +42,24 @@ public class SelectPokemon implements Select {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return 0;
+    }
+
+    public List<String> selectPokemonNamesList() {
+        String sqlStatement = "SELECT * FROM pokemon ORDER BY number ASC";
+
+        List<String> pokemonNames = new ArrayList<>();
+
+        try{
+            Connection conn = connect(DATABASE);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlStatement);
+            while (rs.next()) {
+                pokemonNames.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return pokemonNames;
     }
 
     public String[] selectPokemonNames() {
