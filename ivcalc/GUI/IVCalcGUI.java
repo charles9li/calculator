@@ -40,10 +40,10 @@ public class IVCalcGUI extends Application {
         HBox hBox = new HBox(nameSearch, numLabel, numSearch);
 
         Label selectPokemon = new Label("Select Pokemon");
-        selectPokemon.setAlignment(Pos.BASELINE_CENTER);
+        selectPokemon.setPrefWidth(150);
+        selectPokemon.setAlignment(Pos.CENTER);
 
-        VBox vBox = new VBox(selectPokemon, hBox, pokemonList);
-        return vBox;
+        return new VBox(selectPokemon, hBox, pokemonList);
     }
 
     private ComboBox<String> createPokemonList() {
