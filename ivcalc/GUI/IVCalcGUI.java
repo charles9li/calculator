@@ -1,5 +1,6 @@
 package ivcalc.GUI;
 
+import ivcalc.Data.SelectNatures;
 import ivcalc.Data.SelectPokemon;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -13,9 +14,12 @@ import javafx.stage.Stage;
 
 public class IVCalcGUI extends Application {
 
+    private static final SelectNatures sn = new SelectNatures();
     private static final SelectPokemon sp = new SelectPokemon();
 
-    private ComboBox<String> pokemonList = createPokemonList();
+    private TextField pokemonNameSearch = pokemonNameSearch();
+    private TextField pokemonNumSearch = pokemonNumSearch();
+    private ComboBox<String> pokemonList = pokemonList();
 
     public static void main(String[] args) {
         launch(args);
@@ -28,25 +32,26 @@ public class IVCalcGUI extends Application {
         primaryStage.show();
     }
 
+    // Methods for creating Pokemon selection area.
+
     private VBox pokemonVBox() {
-        TextField nameSearch = new TextField();
-        nameSearch.setPrefWidth(100);
-
         Label numLabel = new Label("   # ");
-
-        TextField numSearch = new TextField();
-        numSearch.setPrefWidth(30);
-
-        HBox hBox = new HBox(nameSearch, numLabel, numSearch);
-
+        HBox hBox = new HBox(pokemonNameSearch, numLabel, pokemonNumSearch);
         Label selectPokemon = new Label("Select Pokemon");
         selectPokemon.setPrefWidth(150);
         selectPokemon.setAlignment(Pos.CENTER);
-
         return new VBox(selectPokemon, hBox, pokemonList);
     }
 
-    private ComboBox<String> createPokemonList() {
+    private TextField pokemonNameSearch() {
+        return createTextField(100);
+    }
+
+    private TextField pokemonNumSearch() {
+        return createTextField(30);
+    }
+
+    private ComboBox<String> pokemonList() {
         ComboBox<String> comboBox = new ComboBox<>();
         for (String name : sp.selectPokemonNamesList()) {
             comboBox.getItems().add(name);
@@ -54,5 +59,13 @@ public class IVCalcGUI extends Application {
         comboBox.setPrefWidth(150);
         comboBox.getSelectionModel().selectFirst();
         return comboBox;
+    }
+
+    // Utility methods.
+
+    private TextField createTextField(double width) {
+        TextField textField = new TextField();
+        textField.setPrefWidth(width);
+        return textField;
     }
 }
