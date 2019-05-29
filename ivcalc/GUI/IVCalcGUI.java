@@ -3,6 +3,8 @@ package ivcalc.GUI;
 import ivcalc.Data.SelectNatures;
 import ivcalc.Data.SelectPokemon;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -14,8 +16,8 @@ import javafx.stage.Stage;
 
 public class IVCalcGUI extends Application {
 
-    private static final SelectNatures sn = new SelectNatures();
-    private static final SelectPokemon sp = new SelectPokemon();
+    private static final SelectNatures SELECT_NATURES = new SelectNatures();
+    private static final SelectPokemon SELECT_POKEMON = new SelectPokemon();
 
     private TextField pokemonNameSearch = pokemonNameSearch();
     private TextField pokemonNumSearch = pokemonNumSearch();
@@ -44,16 +46,32 @@ public class IVCalcGUI extends Application {
     }
 
     private TextField pokemonNameSearch() {
-        return createTextField(100);
+        TextField textField = createTextField(90);
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                pokemonNumSearch.clear();
+                System.out.println("Text changed from " + s + " to " + t1);
+            }
+        });
+        return textField;
     }
 
     private TextField pokemonNumSearch() {
-        return createTextField(30);
+        TextField textField = createTextField(40);
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                pokemonNameSearch.clear();
+                System.out.println("Number change from " + s + " to " + t1);
+            }
+        });
+        return textField;
     }
 
     private ComboBox<String> pokemonList() {
         ComboBox<String> comboBox = new ComboBox<>();
-        for (String name : sp.selectPokemonNamesList()) {
+        for (String name : SELECT_POKEMON.selectPokemonNamesList()) {
             comboBox.getItems().add(name);
         }
         comboBox.setPrefWidth(150);
