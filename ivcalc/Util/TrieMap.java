@@ -42,6 +42,21 @@ public class TrieMap<T extends Comparable<T>> {
         return curr.isKey;
     }
 
+    public boolean containsPrefix(String prefix) {
+        if (prefix == null || prefix.length() < 1) {
+            return false;
+        }
+        Node curr = root;
+        for (int i = 0, n = prefix.length(); i < n; i++) {
+            char c = prefix.charAt(i);
+            if (!curr.map.containsKey(c)) {
+                return false;
+            }
+            curr = curr.map.get(c);
+        }
+        return true;
+    }
+
     public void put(String key, T item) {
         if (key == null || key.length() < 1) {
             return;

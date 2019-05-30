@@ -74,7 +74,7 @@ public class SelectPokemon implements Select {
             ResultSet rs = stmt.executeQuery(sqlStatement);
             int i = 0;
             while (rs.next()) {
-                pokemonNames.put(rs.getString("name"), i);
+                pokemonNames.put(rs.getString("name").toLowerCase(), i);
                 i++;
             }
         } catch (SQLException e) {

@@ -2,6 +2,7 @@ package ivcalc.GUI;
 
 import ivcalc.Data.SelectNatures;
 import ivcalc.Data.SelectPokemon;
+import ivcalc.Util.TrieMap;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,7 +22,8 @@ public class IVCalcGUI extends Application {
 
     private TextField pokemonNameSearch = pokemonNameSearch();
     private TextField pokemonNumSearch = pokemonNumSearch();
-    private ComboBox<String> pokemonList = pokemonList();
+    private ComboBox<String> pokemonDDMenu = pokemonDDMenu();
+    private TrieMap<Integer> pokemonTrie = SELECT_POKEMON.selectPokemonNamesTrie();
 
     public static void main(String[] args) {
         launch(args);
@@ -42,7 +44,7 @@ public class IVCalcGUI extends Application {
         Label selectPokemon = new Label("Select Pokemon");
         selectPokemon.setPrefWidth(150);
         selectPokemon.setAlignment(Pos.CENTER);
-        return new VBox(selectPokemon, hBox, pokemonList);
+        return new VBox(selectPokemon, hBox, pokemonDDMenu);
     }
 
     private TextField pokemonNameSearch() {
@@ -53,6 +55,10 @@ public class IVCalcGUI extends Application {
                 if (!t1.isEmpty()) {
                     System.out.println("Text changed from " + s + " to " + t1);
                     pokemonNumSearch.clear();
+                    if (pokemonTrie.containsPrefix(t1)) {
+                        int i = pokemonTrie.itemsWithPrefix(t1.toLowerCase()).get(0);
+                        pokemonDDMenu.getSelectionModel().select(i);
+                    }
                 }
             }
         });
@@ -73,7 +79,7 @@ public class IVCalcGUI extends Application {
         return textField;
     }
 
-    private ComboBox<String> pokemonList() {
+    private ComboBox<String> pokemonDDMenu() {
         ComboBox<String> comboBox = new ComboBox<>();
         for (String name : SELECT_POKEMON.selectPokemonNamesList()) {
             comboBox.getItems().add(name);
