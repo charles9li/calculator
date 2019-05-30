@@ -1,11 +1,12 @@
 package ivcalc.Util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TrieMap<T> {
+public class TrieMap<T extends Comparable<T>> {
     private Node root;
 
     private class Node {
@@ -82,7 +83,9 @@ public class TrieMap<T> {
             }
             curr = curr.map.get(c);
         }
-        return prefixHelper(prefix, listOfItems, curr);
+        listOfItems = prefixHelper(prefix, listOfItems, curr);
+        Collections.sort(listOfItems);
+        return listOfItems;
     }
 
     private List<T> prefixHelper(String s, List<T> l, Node n) {
