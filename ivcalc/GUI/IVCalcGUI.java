@@ -50,8 +50,10 @@ public class IVCalcGUI extends Application {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                pokemonNumSearch.clear();
-                System.out.println("Text changed from " + s + " to " + t1);
+                if (!t1.isEmpty()) {
+                    System.out.println("Text changed from " + s + " to " + t1);
+                    pokemonNumSearch.clear();
+                }
             }
         });
         return textField;
@@ -62,8 +64,10 @@ public class IVCalcGUI extends Application {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                pokemonNameSearch.clear();
-                System.out.println("Number change from " + s + " to " + t1);
+                if (!t1.isEmpty()) {
+                    System.out.println("Number changed from " + s + " to " + t1);
+                    pokemonNameSearch.clear();
+                }
             }
         });
         return textField;
