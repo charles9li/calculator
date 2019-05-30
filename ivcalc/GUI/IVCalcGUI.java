@@ -6,11 +6,13 @@ import ivcalc.Util.TrieMap;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,6 +32,8 @@ public class IVCalcGUI extends Application {
     private Map<Integer, List<String>> pokemonNumMap = SELECT_POKEMON.selectPokemonNum();
 
     private TextField natureSearch = natureSearch();
+    private ComboBox<String> natureDDMenu = natureDDMenu();
+    private TrieMap<Integer> natureTrie = SELECT_NATURES.selectNatureTrie();
 
     public static void main(String[] args) {
         launch(args);
@@ -37,7 +41,13 @@ public class IVCalcGUI extends Application {
 
     public void start(Stage primaryStage) {
         primaryStage.setTitle("IV Calculator");
-        Scene scene = new Scene(pokemonVBox(), 500, 400);
+        GridPane gridPane = new GridPane();
+        gridPane.add(pokemonVBox(), 0, 0, 1, 1);
+        gridPane.add(natureVBox(), 0, 1, 1, 1);
+        gridPane.setHgap(25);
+        gridPane.setVgap(25);
+        gridPane.setPadding(new Insets(25, 25, 25, 25));
+        Scene scene = new Scene(gridPane, 500, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -107,7 +117,7 @@ public class IVCalcGUI extends Application {
         Label selectNature = new Label("Select Nature");
         selectNature.setPrefWidth(150);
         selectNature.setAlignment(Pos.CENTER);
-        return new VBox(selectNature, natureSearch, pokemonDDMenu);
+        return new VBox(selectNature, natureSearch, natureDDMenu);
     }
 
     private TextField natureSearch() {
@@ -115,10 +125,23 @@ public class IVCalcGUI extends Application {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-
+                if (natureTrie.containsPrefix(t1.toLowerCase())) {
+                    int i = natureTrie.itemsWithPrefix(t1.toLowerCase()).get(0);
+                    natureDDMenu.getSelectionModel().select(i);
+                }
             }
         });
         return textField;
+    }
+
+    private ComboBox<String> natureDDMenu() {
+        ComboBox<String> comboBox = new ComboBox<>();
+        for (String name : SELECT_NATURES.selectNatureList()) {
+            comboBox.getItems().add(name);
+        }
+        comboBox.setPrefWidth(150);
+        comboBox.getSelectionModel().selectFirst();
+        return comboBox;
     }
 
     // Utility methods.
