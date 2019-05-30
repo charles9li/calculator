@@ -2,24 +2,23 @@ package ivcalc.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class TrieMap {
+public class TrieMap<T> {
     private Node root;
 
     private class Node {
         char letter;
         boolean isKey;
         Map<Character, Node> map;
-        List<String> fullNames;
+        T item;
 
-        Node(char l, boolean ik, List<String> fn) {
+        Node(char l, boolean ik, T i) {
             letter = l;
             isKey = ik;
             map = new HashMap<>();
-            fullNames = new LinkedList<>();
+            item = i;
         }
     }
 
@@ -42,7 +41,7 @@ public class TrieMap {
         return curr.isKey;
     }
 
-    public void put(String key, List<String> fullNames) {
+    public void put(String key, T item) {
         if (key == null || key.length() < 1) {
             return;
         }
@@ -55,40 +54,40 @@ public class TrieMap {
             curr = curr.map.get(c);
         }
         curr.isKey = true;
-        curr.fullNames = fullNames;
+        curr.item = item;
     }
 
-    public List<String> get(String key) {
+    public T get(String key) {
         if (contains(key)) {
             Node curr = root;
             for (int i = 0, n = key.length(); i < n; i++) {
                 char c = key.charAt(i);
                 curr = curr.map.get(c);
             }
-            return curr.fullNames;
+            return curr.item;
         }
         return null;
     }
 
-    public List<String> fullNamesWithPrefix(String prefix) {
-        List<String> listOfFullNames = new ArrayList<>();
+    public List<T> itemsWithPrefix(String prefix) {
+        List<T> listOfItems = new ArrayList<>();
         if (prefix == null || prefix.length() < 1) {
-            return listOfFullNames;
+            return listOfItems;
         }
         Node curr = root;
         for (int i = 0, n = prefix.length(); i < n; i++) {
             char c = prefix.charAt(i);
             if (!curr.map.containsKey(c)) {
-                return listOfFullNames;
+                return listOfItems;
             }
             curr = curr.map.get(c);
         }
-        return prefixHelper(prefix, listOfFullNames, curr);
+        return prefixHelper(prefix, listOfItems, curr);
     }
 
-    private List<String> prefixHelper(String s, List<String> l, Node n) {
+    private List<T> prefixHelper(String s, List<T> l, Node n) {
         if (n.isKey) {
-            l.addAll(n.fullNames);
+            l.add(n.item);
         }
         for (char c : n.map.keySet()) {
             l = prefixHelper(s + c, l, n.map.get(c));
