@@ -1,6 +1,7 @@
 package ivcalc.Data;
 
 import ivcalc.Util.StatType;
+import ivcalc.Util.TrieMap;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,6 +56,26 @@ public class SelectPokemon implements Select {
             ResultSet rs = stmt.executeQuery(sqlStatement);
             while (rs.next()) {
                 pokemonNames.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return pokemonNames;
+    }
+
+    public TrieMap<Integer> selectPokemonNamesTrie() {
+        String sqlStatement = "SELECT * FROM pokemon ORDER BY number ASC";
+
+        TrieMap<Integer> pokemonNames = new TrieMap<>();
+
+        try{
+            Connection conn = connect(DATABASE);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlStatement);
+            int i = 0;
+            while (rs.next()) {
+                pokemonNames.put(rs.getString("name"), i);
+                i++;
             }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
