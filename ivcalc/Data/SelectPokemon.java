@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SelectPokemon implements Select {
 
@@ -81,6 +83,31 @@ public class SelectPokemon implements Select {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return pokemonNames;
+    }
+
+    public Map<Integer, List<String>> selectPokemonNum() {
+        String sqlStatement = "SELECT * FROM pokemon ORDER BY number ASC, name ASC";
+
+        Map<Integer, List<String>> pokemonNum = new HashMap<>();
+
+        try{
+            Connection conn = connect(DATABASE);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlStatement);
+            while (rs.next()) {
+                int dexNum = rs.getInt("number");
+                if (!pokemonNum.containsKey(dexNum)) {
+                    List<String> nameList = new ArrayList<>();
+                    nameList.add(rs.getString("name"));
+                    pokemonNum.put(dexNum, nameList);
+                } else {
+                    pokemonNum.get(dexNum).add(rs.getString("name"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return pokemonNum;
     }
 
     public String[] selectPokemonNames() {

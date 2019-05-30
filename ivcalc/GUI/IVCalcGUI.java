@@ -15,6 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.List;
+import java.util.Map;
+
 public class IVCalcGUI extends Application {
 
     private static final SelectNatures SELECT_NATURES = new SelectNatures();
@@ -24,6 +27,9 @@ public class IVCalcGUI extends Application {
     private TextField pokemonNumSearch = pokemonNumSearch();
     private ComboBox<String> pokemonDDMenu = pokemonDDMenu();
     private TrieMap<Integer> pokemonTrie = SELECT_POKEMON.selectPokemonNamesTrie();
+    private Map<Integer, List<String>> pokemonNumMap = SELECT_POKEMON.selectPokemonNum();
+
+    private TextField natureSearch = natureSearch();
 
     public static void main(String[] args) {
         launch(args);
@@ -39,7 +45,9 @@ public class IVCalcGUI extends Application {
     // Methods for creating Pokemon selection area.
 
     private VBox pokemonVBox() {
-        Label numLabel = new Label("   # ");
+        Label numLabel = new Label("#");
+        numLabel.setPrefWidth(20);
+        numLabel.setAlignment(Pos.CENTER_RIGHT);
         HBox hBox = new HBox(pokemonNameSearch, numLabel, pokemonNumSearch);
         Label selectPokemon = new Label("Select Pokemon");
         selectPokemon.setPrefWidth(150);
@@ -71,8 +79,12 @@ public class IVCalcGUI extends Application {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if (!t1.isEmpty()) {
-                    System.out.println("Number changed from " + s + " to " + t1);
-                    pokemonNameSearch.clear();
+                    if (t1.matches("\\d{1,3}")) {
+                        System.out.println("Number changed from " + s + " to " + t1);
+                        pokemonNameSearch.clear();
+                    } else {
+                        textField.setText(s);
+                    }
                 }
             }
         });
@@ -87,6 +99,26 @@ public class IVCalcGUI extends Application {
         comboBox.setPrefWidth(150);
         comboBox.getSelectionModel().selectFirst();
         return comboBox;
+    }
+
+    // Methods for creating nature selection area.
+
+    private VBox natureVBox() {
+        Label selectNature = new Label("Select Nature");
+        selectNature.setPrefWidth(150);
+        selectNature.setAlignment(Pos.CENTER);
+        return new VBox(selectNature, natureSearch, pokemonDDMenu);
+    }
+
+    private TextField natureSearch() {
+        TextField textField = createTextField(150);
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+
+            }
+        });
+        return textField;
     }
 
     // Utility methods.
