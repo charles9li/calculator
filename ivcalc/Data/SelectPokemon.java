@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +51,7 @@ public class SelectPokemon implements Select {
 
         List<String> pokemonNames = new ArrayList<>();
 
-        try{
+        try {
             Connection conn = connect(DATABASE);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sqlStatement);
@@ -70,7 +69,7 @@ public class SelectPokemon implements Select {
 
         TrieMap<Integer> pokemonNames = new TrieMap<>();
 
-        try{
+        try {
             Connection conn = connect(DATABASE);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sqlStatement);
@@ -90,7 +89,7 @@ public class SelectPokemon implements Select {
 
         Map<Integer, List<String>> pokemonNum = new HashMap<>();
 
-        try{
+        try {
             Connection conn = connect(DATABASE);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sqlStatement);
