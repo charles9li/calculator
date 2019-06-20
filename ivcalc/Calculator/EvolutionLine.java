@@ -1,7 +1,7 @@
 package ivcalc.Calculator;
 
 import ivcalc.Data.SelectNatures;
-import ivcalc.Util.IVList;
+import ivcalc.Util.IntList;
 import ivcalc.Util.StatType;
 
 import java.util.ArrayDeque;
@@ -104,7 +104,7 @@ public class EvolutionLine {
             List<Integer> IVRange = calcIVRangeLevel(statType, levelInfo);
             IVRangeDeque.addLast(IVRange);
         }
-        return IVList.createIVList(IVRangeDeque);
+        return IntList.createIVList(IVRangeDeque);
     }
 
     /**
@@ -121,7 +121,7 @@ public class EvolutionLine {
 
         // Shedinja HP exception
         if (statType == StatType.HP && getEvolutionName(evoIndex).equals("Shedinja")) {
-            return IVList.createIVList(0, 31);
+            return IntList.createIVList(0, 31);
         }
 
         // check if stat input is valid
@@ -152,7 +152,7 @@ public class EvolutionLine {
                 i++;
             }
         }
-        return IVList.createIVList(makeIVProper(lowerBound), makeIVProper(upperBound));
+        return IntList.createIVList(makeIVProper(lowerBound), makeIVProper(upperBound));
     }
 
     // Calculation methods.

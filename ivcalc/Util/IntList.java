@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class IVList {
+public class IntList {
 
     public static List<Integer> createIVList(int lowerBound, int upperBound) {
         List<Integer> returnList = new ArrayList<>();

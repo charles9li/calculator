@@ -1,14 +1,11 @@
 package ivcalc.Test;
 
-import edu.princeton.cs.algs4.In;
 import ivcalc.Calculator.EvolutionLine;
 import ivcalc.Calculator.LevelInfo;
-import ivcalc.Calculator.Pokemon;
-import ivcalc.Util.IVList;
+import ivcalc.Util.IntList;
 import ivcalc.Util.StatType;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -22,22 +19,22 @@ public class TestEvolutionLine {
         evolutionLine.addLevelInfo(lvl50);
         evolutionLine.calcIVRanges();
 
-        List<Integer> hpExpected = IVList.createIVList(31, 31);
+        List<Integer> hpExpected = IntList.createIVList(31, 31);
         assertEquals(hpExpected, evolutionLine.getIVRange(StatType.HP));
 
-        List<Integer> atkExpected = IVList.createIVList(30, 31);
+        List<Integer> atkExpected = IntList.createIVList(30, 31);
         assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
 
-        List<Integer> defExpected = IVList.createIVList(30, 31);
+        List<Integer> defExpected = IntList.createIVList(30, 31);
         assertEquals(atkExpected, evolutionLine.getIVRange(StatType.DEF));
 
-        List<Integer> spaExpected = IVList.createIVList(31, 31);
+        List<Integer> spaExpected = IntList.createIVList(31, 31);
         assertEquals(spaExpected, evolutionLine.getIVRange(StatType.SPA));
 
-        List<Integer> spdExpected = IVList.createIVList(31, 31);
+        List<Integer> spdExpected = IntList.createIVList(31, 31);
         assertEquals(spdExpected, evolutionLine.getIVRange(StatType.SPD));
 
-        List<Integer> speExpected = IVList.createIVList(0, 1);
+        List<Integer> speExpected = IntList.createIVList(0, 1);
         assertEquals(speExpected, evolutionLine.getIVRange(StatType.SPE));
     }
 
@@ -48,13 +45,13 @@ public class TestEvolutionLine {
         evolutionLine.addLevelInfo(lvl100);
         evolutionLine.calcIVRanges();
 
-        List<Integer> hpExpected = IVList.createIVList(0, 31);
+        List<Integer> hpExpected = IntList.createIVList(0, 31);
         assertEquals(hpExpected, evolutionLine.getIVRange(StatType.HP));
 
-        List<Integer> atkExpected = IVList.createIVList(20, 20);
+        List<Integer> atkExpected = IntList.createIVList(20, 20);
         assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
 
-        List<Integer> spaExpected = IVList.createIVList(24, 24);
+        List<Integer> spaExpected = IntList.createIVList(24, 24);
         assertEquals(spaExpected, evolutionLine.getIVRange(StatType.SPA));
     }
 
@@ -65,21 +62,21 @@ public class TestEvolutionLine {
         evolutionLine.addLevelInfo(lvl22);
         evolutionLine.calcIVRanges();
 
-        List<Integer> atkExpected = IVList.createIVList(24, 28);
+        List<Integer> atkExpected = IntList.createIVList(24, 28);
         assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
 
         LevelInfo lvl23 = new LevelInfo(23, 0, 53, 31, 32, 44, 40, 48);
         evolutionLine.addLevelInfo(lvl23);
         evolutionLine.calcIVRanges();
 
-        atkExpected = IVList.createIVList(24, 27);
+        atkExpected = IntList.createIVList(24, 27);
         assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
 
         LevelInfo lvl24 = new LevelInfo(24, 0, 55, 33, 33, 46, 41, 50);
         evolutionLine.addLevelInfo(lvl24);
         evolutionLine.calcIVRanges();
 
-        atkExpected = IVList.createIVList(27, 27);
+        atkExpected = IntList.createIVList(27, 27);
         assertEquals(atkExpected, evolutionLine.getIVRange(StatType.ATK));
     }
 }
