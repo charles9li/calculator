@@ -131,7 +131,6 @@ public class EvolutionLine {
         int baseStat = getBaseStat(evoIndex, statType);
         int stat = lvlInfo.getStat(statType);
         int ev = lvlInfo.getEV(statType);
-        List<Integer> returnList = new ArrayList<>();
         int lowerBound = 0;
         int upperBound = 31;
         if (statType == StatType.HP) {
