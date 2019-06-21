@@ -104,7 +104,7 @@ public class EvolutionLine {
             List<Integer> IVRange = calcIVRangeLevel(statType, levelInfo);
             IVRangeDeque.addLast(IVRange);
         }
-        return IntList.createIVList(IVRangeDeque);
+        return IntList.intListIntersect(IVRangeDeque);
     }
 
     /**
@@ -121,7 +121,7 @@ public class EvolutionLine {
 
         // Shedinja HP exception
         if (statType == StatType.HP && getEvolutionName(evoIndex).equals("Shedinja")) {
-            return IntList.createIVList(0, 31);
+            return IntList.createIntList(0, 31);
         }
 
         // check if stat input is valid
@@ -152,7 +152,7 @@ public class EvolutionLine {
                 i++;
             }
         }
-        return IntList.createIVList(makeIVProper(lowerBound), makeIVProper(upperBound));
+        return IntList.createIntList(makeIVProper(lowerBound), makeIVProper(upperBound));
     }
 
     // Calculation methods.

@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class IntList {
 
-    public static List<Integer> createIVList(int lowerBound, int upperBound) {
+    public static List<Integer> createIntList(int lowerBound, int upperBound) {
         List<Integer> returnList = new ArrayList<>();
         for (int iv = lowerBound; iv <= upperBound; iv++) {
             returnList.add(iv);
@@ -17,7 +17,7 @@ public class IntList {
         return returnList;
     }
 
-    public static List<Integer> createIVList(Deque<List<Integer>> listDeque) {
+    public static List<Integer> intListIntersect(Deque<List<Integer>> listDeque) {
         if (listDeque.isEmpty()) {
             throw new IllegalArgumentException("Deque must contain at least one List instance.");
         }
