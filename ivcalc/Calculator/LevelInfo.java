@@ -36,7 +36,8 @@ public class LevelInfo {
     public LevelInfo(int lvl, int evoIndex,
                      int hpStat, int atkStat, int defStat,
                      int spaStat, int spdStat, int speStat) {
-        this(lvl, evoIndex, hpStat, atkStat, defStat, spaStat, spdStat, speStat,
+        this(lvl, evoIndex, hpStat, atkStat,
+            defStat, spaStat, spdStat, speStat,
             0, 0, 0, 0, 0, 0);
     }
 
@@ -56,18 +57,40 @@ public class LevelInfo {
             spaEV, spdEV, speEV);
     }
 
+    /**
+     * Returns Pokemon level.
+     *
+     * @return level
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     * Returns evolution index.
+     *
+     * @return evolution index
+     */
     public int getEvoIndex() {
         return evoIndex;
     }
 
+    /**
+     * Returns stat value for given stat type.
+     *
+     * @param statType type of stat
+     * @return stat value
+     */
     public int getStat(StatType statType) {
         return stats.get(statType);
     }
 
+    /**
+     * Returns effort values in given stat type.
+     *
+     * @param statType type of stat
+     * @return effort values in given stat
+     */
     public int getEV(StatType statType) {
         return effortValues.get(statType);
     }
