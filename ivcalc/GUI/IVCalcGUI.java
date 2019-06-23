@@ -28,8 +28,10 @@ public class IVCalcGUI extends Application {
     private TextField pokemonNameSearch = pokemonNameSearch();
     private TextField pokemonNumSearch = pokemonNumSearch();
     private ComboBox<String> pokemonDDMenu = pokemonDDMenu();
-    private TrieMap<Integer> pokemonTrie = SELECT_POKEMON.selectPokemonNamesTrie();
-    private Map<Integer, List<String>> pokemonNumMap = SELECT_POKEMON.selectPokemonNum();
+    private TrieMap<Integer> pokemonTrie =
+        SELECT_POKEMON.selectPokemonNamesTrie();
+    private Map<Integer, List<String>> pokemonNumMap =
+        SELECT_POKEMON.selectPokemonNum();
 
     private TextField natureSearch = natureSearch();
     private ComboBox<String> natureDDMenu = natureDDMenu();
@@ -92,6 +94,11 @@ public class IVCalcGUI extends Application {
                     if (t1.matches("\\d{1,3}")) {
                         System.out.println("Number changed from " + s + " to " + t1);
                         pokemonNameSearch.clear();
+                        int dexNum = Integer.parseInt(t1);
+                        if (pokemonNumMap.containsKey(dexNum)) {
+                            String pokemonName = pokemonNumMap.get(dexNum).get(0).toLowerCase();
+                            pokemonDDMenu.getSelectionModel().select(pokemonTrie.get(pokemonName));
+                        }
                     } else {
                         textField.setText(s);
                     }
